@@ -1,36 +1,32 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String... args) {
-        int[] numbers = { 8, 3, 7, 9, 1, 2, 4 };
-        Main.sort(numbers);
-    }
-
-    public static void sort(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            int smallestIdx = indexOfSmallestFrom(arr, i);
-            swap(arr, i, smallestIdx);
-        }
-    }
-
-    public static int indexOfSmallestFrom(int[] table, int startIndex) {
-        int smallest = table[startIndex];
-        int smallestIdx = startIndex;
-
-        for (int i = startIndex; i < table.length; i++) {
-            if (table[i] < smallest) {
-                smallest = table[i];
-                smallestIdx = i;
-            }
+        // The program below is meant for testing the search algorithms you'll write
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Book> books = new ArrayList<>();
+        System.out.println("How many books to create?");
+        int numberOfBooks = Integer.valueOf(scanner.nextLine());
+        for (int i = 0; i < numberOfBooks; i++) {
+            books.add(new Book(i, "name for the book " + i));
         }
 
-        return smallestIdx;
-    }
+        System.out.println("Id of the book to search for?");
+        int idToSearchFor = Integer.valueOf(scanner.nextLine());
 
-    public static void swap(int[] arr, int index1, int index2) {
-        int hold = arr[index1];
-        arr[index1] = arr[index2];
-        arr[index2] = hold;
-        System.out.println(Arrays.toString(arr));
+        System.out.println("Seaching with binary search:");
+        long start = System.currentTimeMillis();
+
+        int binarySearchId = BinarySearch.getIdx(books, idToSearchFor);
+
+        System.out.println("The search took " + (System.currentTimeMillis() - start) + " milliseconds.");
+        if (binarySearchId < 0) {
+            System.out.println("Book not found");
+        } else {
+            System.out.println("Found it! " + books.get(binarySearchId));
+        }
+
+        scanner.close();
     }
 }
