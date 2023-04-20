@@ -1,18 +1,22 @@
 public class Main {
     public static void main(String... args) {
-        VehicleRegistry registry = new VehicleRegistry();
+        StorageFacility facility = new StorageFacility();
+        facility.add("a14", "ice skates");
+        facility.add("a14", "ice hockey stick");
+        facility.add("a14", "ice skates");
 
-        LicensePlate li1 = new LicensePlate("FI", "ABC-123");
-        LicensePlate li2 = new LicensePlate("FI", "UXE-465");
-        LicensePlate li3 = new LicensePlate("D", "B WQ-431");
-        LicensePlate li4 = new LicensePlate("FI", "DEF-345");
+        facility.add("f156", "rollerblades");
+        facility.add("f156", "rollerblades");
 
-        System.out.println(registry.add(li1, "Giorgio"));
-        System.out.println(registry.add(li2, "Fiore"));
-        System.out.println(registry.add(li3, "Luna"));
-        System.out.println(registry.add(li4, "Giorgio"));
+        facility.add("g63", "six");
+        facility.add("g63", "pi");
 
-        registry.printLicensePlates();
-        registry.printOwners();
+        facility.remove("f156", "rollerblades");
+
+        System.out.println(facility.contents("f156"));
+
+        facility.remove("f156", "rollerblades");
+
+        System.out.println(facility.storageUnits());
     }
 }
